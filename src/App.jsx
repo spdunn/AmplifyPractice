@@ -40,7 +40,6 @@ function App() {
       }
     }).then(resp => {
       console.log(resp);
-      // setTestArr([...testArr, {name: resp.name, type: resp.type}])
     });
   }
 
