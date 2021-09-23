@@ -10,6 +10,7 @@ import { createGame } from './graphql/mutations.ts';
 Amplify.configure(config);
 
 function App() {
+  // Colby told me to
   const [testName, setTestName] = useState('');
   const [testType, setTestType] = useState('');
   const [testArr, setTestArr] = useState([]);
