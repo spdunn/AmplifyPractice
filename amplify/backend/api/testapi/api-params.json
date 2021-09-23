@@ -1,0 +1,42 @@
+{
+  "paths": [
+    {
+      "name": "/test",
+      "lambdaFunction": "testfunction",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/POST",
+          "/GET",
+          "/PUT",
+          "/PATCH",
+          "/DELETE"
+        ]
+      },
+      "policyResourceName": "/test"
+    }
+  ],
+  "resourceName": "testapi",
+  "apiName": "testapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "testfunction"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-amplifytest-dev-213351-authRole",
+    "unAuthRoleName": "amplify-amplifytest-dev-213351-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "testfunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
