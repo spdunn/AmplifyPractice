@@ -12,11 +12,6 @@ import { listGames } from './graphql/queries';
 Amplify.configure(config);
 
 function App() {
-  // Colby told me to
-  const [testName, setTestName] = useState('');
-  const [testType, setTestType] = useState('');
-  const [testArr, setTestArr] = useState([]);
-
   // GraphQL
   const [testGameName, setTestGameName] = useState('');
   const [testGameDesc, setTestGameDesc] = useState('');
@@ -25,11 +20,6 @@ function App() {
   const gamesRef = useRef(games);
 
   useEffect(() => {
-    API.get('testapi', '/test/name')
-      .then((resp) => {
-        console.log(resp);
-        setTestArr([...testArr, ...resp]);
-      });
 
     API.graphql(graphqlOperation(listGames)).then(resp => {
       console.log(resp);
@@ -58,19 +48,6 @@ function App() {
     }
   }, [])
 
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    API.post('testapi', '/test', {
-      body: {
-        name: testName,
-        type: testType
-      }
-    }).then(resp => {
-      console.log(resp);
-    });
-  }
-
   const handleSubmitGraphQL = async () => {
     console.log(testGameName, testGameDesc);
     if (testGameName === '' || testGameDesc === '') return;
@@ -89,29 +66,18 @@ function App() {
     <div className="App">
       <header className="App-header">
         Hello React
-        <form onSubmit={handleSubmit}>
-        <input value={testName} placeholder="Enter name here" onChange={(e) => setTestName(e.target.value)} />
-        <input value={testType} placeholder="Enter type here" onChange={(e) => setTestType(e.target.value)} />
-        <button>Add to DynamoDB</button>
-        </form>
-        <ul>
-          {testArr.map(test => <li>{test.name}</li>)}
-        </ul>
         <br></br>
         <br></br>
         <br></br>
-        {/* <form onSubmit={handleSubmitGraphQL}> */}
         <input value={testGameName} placeholder="Enter name here" onChange={(e) => setTestGameName(e.target.value)} />
         <input value={testGameDesc} placeholder="Enter desc here" onChange={(e) => setTestGameDesc(e.target.value)} />
         <button onClick={handleSubmitGraphQL}>Add to DynamoDB with GraphQL</button>
-        {/* </form> */}
         <ul>
           {games.map(temp => <li>{temp.name}</li>)}
         </ul>
-        <SignOut />
       </header>
     </div>
   );
 }
 
-export default withAuthenticator(App); 
+export default App; 
